@@ -28,10 +28,30 @@ Page({
       }
       const user = store.getState('user')
       const canEdit = !!(user && record && record.openid === user._openid)
+
+      // 转换图片 cloud:// 为临时链接（显示缩略图用）
+      let displayImages = record.images || []
+      if (displayImages.length && displayImages.some(u => u.startsWith('cloud://'))) {
+        try {
+          const res = await wx.cloud.callFunction({
+            name: 'getTempFileURL',
+            data: { fileList: displayImages }
+          })
+          if (res.result.code === 0) {
+            const map = {}
+            res.result.data.forEach(f => { map[f.fileID] = f.tempFileURL })
+            displayImages = displayImages.map(u => map[u] || u)
+          }
+        } catch (err) {
+          console.error('图片链接转换失败', err)
+        }
+      }
+
       this.setData({
         loading: false,
         record: {
           ...record,
+          images: displayImages,  // 替换为 https 链接
           amount_label: moneyUtil.format(record.amount),
           record_date_label: dateUtil.formatDate(record.record_date, 'yyyy-MM-dd HH:mm'),
           created_at_label: dateUtil.formatDate(record.created_at, 'yyyy-MM-dd HH:mm')
@@ -63,6 +83,7 @@ Page({
   previewImage(e) {
     const src = e.currentTarget.dataset.src
     const urls = (this.data.record && this.data.record.images) || []
+    // load 时已经转换过了，直接预览
     wx.previewImage({ urls, current: src })
   },
 

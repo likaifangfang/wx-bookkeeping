@@ -234,12 +234,28 @@ Page({
   },
 
   /** 预览图片大图 */
-  previewImage(e) {
+  async previewImage(e) {
     const src = e.currentTarget.dataset.src
-    wx.previewImage({
-      urls: this.data.form.images,
-      current: src
-    })
+    const images = this.data.form.images || []
+    // cloud:// 需要云函数中转,本地临时路径直接用
+    const cloudOnes = images.filter(u => u.startsWith('cloud://'))
+    let urlMap = {}
+    if (cloudOnes.length) {
+      try {
+        const res = await wx.cloud.callFunction({
+          name: 'getTempFileURL',
+          data: { fileList: cloudOnes }
+        })
+        if (res.result.code === 0) {
+          res.result.data.forEach(f => { urlMap[f.fileID] = f.tempFileURL })
+        }
+      } catch (err) {
+        console.error('图片预览失败', err)
+      }
+    }
+    const urls = images.map(u => urlMap[u] || u)
+    const current = urlMap[src] || src
+    wx.previewImage({ urls, current })
   },
 
   /** picker mode=date 的 change 事件 */
