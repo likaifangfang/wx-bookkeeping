@@ -1,0 +1,6 @@
+.page { padding: 24rpx; min-height: 100vh; }
+.cell-group { background: #fff; border-radius: 16rpx; overflow: hidden; }
+.cell { display: flex; align-items: center; padding: 32rpx; }
+.cell-label { flex: 1; font-size: 30rpx; }
+.cell-arrow { color: #c8c9cc; font-size: 32rpx; }
+.hint { text-align: center; padding: 48rpx 0; font-size: 24rpx; }

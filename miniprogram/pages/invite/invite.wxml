@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="hero">👫</view>
+  <view class="title">加入共享账本</view>
+
+  <block wx:if="{{ autoMode }}">
+    <view class="hint text-muted">邀请码：{{ code }}</view>
+    <view class="btn-primary" bindtap="joinAuto">同意并加入</view>
+  </block>
+
+  <block wx:else>
+    <view class="hint text-muted">请输入 6 位邀请码</view>
+    <input
+      class="input"
+      maxlength="6"
+      placeholder="输入邀请码"
+      bindinput="onCodeInput"
+      value="{{ inputCode }}"
+    />
+    <view class="btn-primary" bindtap="joinManual">加入</view>
+  </block>
+</view>

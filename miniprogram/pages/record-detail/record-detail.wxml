@@ -1,0 +1,57 @@
+<view class="loading-state" wx:if="{{ loading }}">
+  <view class="loading-spinner"></view>
+  <view class="text-muted">加载中...</view>
+</view>
+
+<view class="detail-page" wx:elif="{{ record }}">
+  <view class="header" style="background:{{ record.category_color }}">
+    <view class="emoji-big">{{ record.category_icon }}</view>
+    <view class="category-name">{{ record.category_name }}</view>
+    <view class="amount">
+      <text class="sign">{{ record.type === 'expense' ? '-' : '+' }}¥</text>
+      {{ record.amount_label }}
+    </view>
+    <view class="type-tag">{{ record.type === 'expense' ? '支出' : '收入' }}</view>
+  </view>
+
+  <view class="info">
+    <view class="row">
+      <view class="label">时间</view>
+      <view class="value">{{ record.record_date_label }}</view>
+    </view>
+    <view class="row" wx:if="{{ record.note }}">
+      <view class="label">备注</view>
+      <view class="value">{{ record.note }}</view>
+    </view>
+    <view class="row image-row" wx:if="{{ record.images && record.images.length }}">
+      <view class="label">图片</view>
+      <view class="image-list">
+        <image
+          wx:for="{{ record.images }}"
+          wx:key="*this"
+          src="{{ item }}"
+          mode="aspectFill"
+          bindtap="previewImage"
+          data-src="{{ item }}"
+        />
+      </view>
+    </view>
+    <view class="row">
+      <view class="label">记录人</view>
+      <view class="value">{{ record.creator_nickname || '我' }}</view>
+    </view>
+    <view class="row">
+      <view class="label">创建于</view>
+      <view class="value text-muted">{{ record.created_at_label }}</view>
+    </view>
+  </view>
+
+  <view class="actions" wx:if="{{ canEdit }}">
+    <view class="btn btn-edit" bindtap="onEdit">编辑</view>
+    <view class="btn btn-default" bindtap="onDelete">删除</view>
+  </view>
+</view>
+
+<view class="empty" wx:elif="{{ loadFailed }}">
+  <view>记录不存在或已删除</view>
+</view>

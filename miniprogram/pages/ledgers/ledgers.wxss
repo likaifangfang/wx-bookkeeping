@@ -1,0 +1,38 @@
+.ledgers-page { padding: 24rpx; min-height: 100vh; }
+
+.ledger-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.left {
+  width: 96rpx; height: 96rpx; border-radius: 16rpx;
+  color: #fff; font-size: 24rpx;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 24rpx; flex-shrink: 0;
+}
+
+.middle { flex: 1; min-width: 0; }
+.name { font-size: 30rpx; font-weight: 500; }
+.badge {
+  display: inline-block; margin-left: 8rpx;
+  background: #e8f3ff; color: #4A90E2;
+  font-size: 20rpx; padding: 2rpx 12rpx; border-radius: 12rpx;
+  font-weight: normal;
+}
+.meta { font-size: 22rpx; margin-top: 4rpx; }
+
+.right { color: #4A90E2; font-size: 26rpx; padding: 8rpx 16rpx; }
+
+.add-btn {
+  margin-top: 32rpx;
+  height: 96rpx; line-height: 96rpx;
+  text-align: center;
+  background: #4A90E2; color: #fff;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+}

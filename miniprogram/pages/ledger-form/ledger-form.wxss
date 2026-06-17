@@ -1,0 +1,26 @@
+.page { padding: 24rpx; min-height: 100vh; }
+.card { background: #fff; border-radius: 16rpx; padding: 8rpx 32rpx; }
+.row { display: flex; align-items: center; padding: 24rpx 0; border-top: 1rpx solid #ebedf0; }
+.row:first-child { border-top: none; }
+.label { width: 140rpx; color: #646566; font-size: 28rpx; }
+.input { flex: 1; font-size: 28rpx; }
+
+.colors { display: flex; flex-wrap: wrap; flex: 1; }
+.color-dot {
+  width: 56rpx; height: 56rpx; border-radius: 50%;
+  margin-right: 16rpx; margin-bottom: 12rpx;
+  position: relative;
+}
+.color-dot.selected::after {
+  content: '✓'; color: #fff; font-size: 28rpx; font-weight: 600;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit {
+  margin: 48rpx 0;
+  height: 96rpx; line-height: 96rpx;
+  text-align: center;
+  background: #4A90E2; color: #fff;
+  border-radius: 48rpx; font-size: 30rpx;
+}

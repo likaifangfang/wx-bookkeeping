@@ -1,0 +1,88 @@
+<view class="index-page">
+  <!-- 顶部账本切换 -->
+  <view class="header" bindtap="goLedgers">
+    <view class="ledger-name">
+      {{ currentLedger.name || '加载中…' }}
+      <text class="caret">▾</text>
+    </view>
+  </view>
+
+  <!-- 月度概览卡(含月份切换) -->
+  <view class="overview-card">
+    <view class="month-switch">
+      <view class="month-arrow" bindtap="prevMonth">‹</view>
+      <view class="month-label">{{ monthLabel }}</view>
+      <view class="month-arrow {{ isCurrentMonth ? 'disabled' : '' }}" bindtap="nextMonth">›</view>
+    </view>
+
+    <view class="big-amount">
+      <text class="big-symbol">¥</text>
+      <text class="big-value">{{ overview.expense_label }}</text>
+    </view>
+    <view class="big-tip">本月支出</view>
+
+    <view class="overview-divider"></view>
+
+    <view class="sub-row">
+      <view class="sub-item">
+        <view class="sub-label">本月收入</view>
+        <view class="sub-value">¥{{ overview.income_label }}</view>
+      </view>
+      <view class="sub-item">
+        <view class="sub-label">结余</view>
+        <view class="sub-value">¥{{ overview.balance_label }}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list" wx:if="{{ !isEmpty }}">
+    <view class="group" wx:for="{{ groups }}" wx:key="date_key">
+      <view class="group-header">
+        <view class="group-date">
+          <text class="group-day">{{ item.date_label }}</text>
+          <text class="group-week">{{ item.weekday }}</text>
+        </view>
+        <view class="group-summary">
+          <text class="text-muted">支出</text>
+          <text class="text-danger" style="margin-right: 16rpx;">¥{{ item.expense_label }}</text>
+          <text class="text-muted">收入</text>
+          <text class="text-success">¥{{ item.income_label }}</text>
+        </view>
+      </view>
+      <view
+        class="record-item"
+        wx:for="{{ item.items }}"
+        wx:for-item="r"
+        wx:key="_id"
+        data-id="{{ r._id }}"
+        bindtap="goDetail"
+        bindlongpress="onLongPress"
+      >
+        <view class="record-icon" style="background:{{ r.category_color }}">
+          <text class="emoji">{{ r.category_icon }}</text>
+        </view>
+        <view class="record-main">
+          <view class="record-name">{{ r.category_name }}</view>
+          <view class="record-note text-muted" wx:if="{{ r.note }}">{{ r.note }}</view>
+        </view>
+        <view class="record-amount {{ r.type === 'expense' ? 'text-danger' : 'text-success' }}">
+          {{ r.amount_label }}
+        </view>
+      </view>
+    </view>
+    <view class="load-more text-muted" wx:if="{{ !hasMore }}">— 没有更多了 —</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{ isEmpty }}">
+    <view class="empty-icon">💸</view>
+    <view class="empty-title">{{ isCurrentMonth ? '本月还没有记账' : '这个月没有记录' }}</view>
+    <view class="empty-tip" wx:if="{{ isCurrentMonth }}">点击下方 ＋ 开始记一笔吧</view>
+  </view>
+
+  <!-- 浮动加号 -->
+  <view class="fab" bindtap="goRecord">
+    <text class="fab-plus">＋</text>
+  </view>
+</view>

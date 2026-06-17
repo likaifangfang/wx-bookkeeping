@@ -1,0 +1,42 @@
+.page { padding: 24rpx; min-height: 100vh; }
+.card { background: #fff; border-radius: 16rpx; padding: 8rpx 32rpx; margin-bottom: 24rpx; }
+.card-title { padding: 24rpx 0 8rpx; font-size: 26rpx; color: #969799; }
+
+.row { display: flex; padding: 24rpx 0; border-top: 1rpx solid #ebedf0; }
+.row:first-child { border-top: none; }
+.label { width: 140rpx; color: #646566; font-size: 28rpx; }
+.value { flex: 1; font-size: 28rpx; }
+
+.member { display: flex; align-items: center; padding: 16rpx 0; border-top: 1rpx solid #ebedf0; }
+.m-avatar-wrap { margin-right: 16rpx; }
+.m-avatar { width: 64rpx; height: 64rpx; border-radius: 50%; background: #ebedf0; }
+.m-avatar-placeholder { display: flex; align-items: center; justify-content: center; font-size: 32rpx; color: #969799; background: #f7f8fa; }
+.m-info { flex: 1; }
+.m-name { font-size: 28rpx; }
+.m-role { font-size: 22rpx; }
+
+.actions { padding: 32rpx 0; }
+.actions button {
+  display: block; width: 100%; margin: 16rpx 0;
+  height: 88rpx; line-height: 88rpx;
+  border-radius: 48rpx; font-size: 30rpx;
+  border: none;
+}
+.btn-primary { background: #4A90E2; color: #fff; }
+.btn-share { background: #07c160; color: #fff; }
+.btn-default {
+  text-align: center;
+  height: 88rpx; line-height: 88rpx;
+  border-radius: 48rpx; font-size: 30rpx;
+  background: #fff; color: #ee0a24;
+  margin: 16rpx 0;
+}
+
+.btn-danger {
+  text-align: center;
+  height: 88rpx; line-height: 88rpx;
+  border-radius: 48rpx; font-size: 30rpx;
+  background: #fff; color: #ee0a24;
+  margin: 16rpx 0;
+  border: 1rpx solid #ee0a24;
+}

@@ -1,0 +1,6 @@
+<view class="page">
+  <view class="logo">💰</view>
+  <view class="app-name">微信记账</view>
+  <view class="version text-muted">v{{ version }}</view>
+  <view class="desc text-muted">轻量好用的记账小程序</view>
+</view>

@@ -1,0 +1,109 @@
+<view class="record-page">
+  <!-- 类型切换 -->
+  <view class="type-tabs">
+    <view
+      class="tab {{ form.type === 'expense' ? 'active' : '' }}"
+      data-type="expense"
+      bindtap="switchType"
+    >支出</view>
+    <view
+      class="tab {{ form.type === 'income' ? 'active' : '' }}"
+      data-type="income"
+      bindtap="switchType"
+    >收入</view>
+  </view>
+
+  <!-- 金额显示 -->
+  <view class="amount-area">
+    <view class="amount-row">
+      <text class="amount-symbol">¥</text>
+      <text class="amount-value {{ form.amount === '0' ? 'placeholder' : '' }}">{{ form.amount }}</text>
+    </view>
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="section-title">选择分类</view>
+  <view class="category-list">
+    <view
+      class="category-item {{ form.category_id === c._id ? 'selected' : '' }}"
+      wx:for="{{ categories }}"
+      wx:key="_id"
+      wx:for-item="c"
+      data-id="{{ c._id }}"
+      data-name="{{ c.name }}"
+      data-icon="{{ c.icon }}"
+      data-color="{{ c.color }}"
+      bindtap="selectCategory"
+    >
+      <view class="category-icon" style="background:{{ c.color }}">
+        <text class="emoji">{{ c.icon }}</text>
+      </view>
+      <view class="category-name">{{ c.name }}</view>
+    </view>
+  </view>
+
+  <!-- 其他字段 -->
+  <view class="extras">
+    <picker
+      mode="date"
+      value="{{ form.record_date_str }}"
+      end="{{ todayStr }}"
+      bindchange="onDateChange"
+    >
+      <view class="extra-row">
+        <view class="extra-label">📅 日期</view>
+        <view class="extra-value">{{ form.date_label }}</view>
+      </view>
+    </picker>
+    <view class="extra-row">
+      <view class="extra-label">📝 备注</view>
+      <input
+        class="extra-input"
+        placeholder="点击添加备注（可选）"
+        value="{{ form.note }}"
+        bindinput="onNoteInput"
+        confirm-type="done"
+        maxlength="100"
+      />
+    </view>
+    <view class="extra-row image-row">
+      <view class="extra-label">🖼 图片</view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{ form.images }}" wx:key="*this">
+          <image src="{{ item }}" mode="aspectFill" bindtap="previewImage" data-src="{{ item }}" />
+          <view class="image-remove" catchtap="removeImage" data-index="{{ index }}">×</view>
+        </view>
+        <view
+          class="image-add"
+          wx:if="{{ form.images.length < 3 }}"
+          bindtap="chooseImage"
+        >
+          <text class="plus">+</text>
+          <text class="hint">{{ form.images.length }}/3</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义数字键盘 -->
+  <view class="keyboard">
+    <view class="key" bindtap="onKey" data-k="1">1</view>
+    <view class="key" bindtap="onKey" data-k="2">2</view>
+    <view class="key" bindtap="onKey" data-k="3">3</view>
+    <view class="key key-fn" bindtap="onKey" data-k="back">⌫</view>
+
+    <view class="key" bindtap="onKey" data-k="4">4</view>
+    <view class="key" bindtap="onKey" data-k="5">5</view>
+    <view class="key" bindtap="onKey" data-k="6">6</view>
+    <view class="key key-date" bindtap="pickDate">日期</view>
+
+    <view class="key" bindtap="onKey" data-k="7">7</view>
+    <view class="key" bindtap="onKey" data-k="8">8</view>
+    <view class="key" bindtap="onKey" data-k="9">9</view>
+    <view class="key key-save key-double" bindtap="save">保存</view>
+
+    <view class="key" bindtap="onKey" data-k=".">.</view>
+    <view class="key" bindtap="onKey" data-k="0">0</view>
+    <view class="key" bindtap="onKey" data-k="00">00</view>
+  </view>
+</view>

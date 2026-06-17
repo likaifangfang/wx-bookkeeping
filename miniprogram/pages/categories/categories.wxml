@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="type-tabs">
+    <view class="tab {{ type === 'expense' ? 'active' : '' }}" data-type="expense" bindtap="switchType">支出</view>
+    <view class="tab {{ type === 'income' ? 'active' : '' }}" data-type="income" bindtap="switchType">收入</view>
+  </view>
+
+  <view class="list">
+    <view class="item" wx:for="{{ categories }}" wx:key="_id">
+      <view class="icon" style="background:{{ item.color }}"><text class="emoji">{{ item.icon }}</text></view>
+      <view class="name">{{ item.name }}</view>
+      <view class="tag" wx:if="{{ item.is_default }}">系统</view>
+    </view>
+  </view>
+
+  <view class="hint text-muted">分类的新增、隐藏功能将在后续版本开放</view>
+</view>

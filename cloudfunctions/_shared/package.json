@@ -1,0 +1,6 @@
+{
+  "name": "_shared",
+  "version": "1.0.0",
+  "description": "云函数共享工具模块",
+  "main": "utils.js"
+}

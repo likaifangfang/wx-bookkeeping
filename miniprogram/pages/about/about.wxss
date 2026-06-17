@@ -1,0 +1,5 @@
+.page { padding: 120rpx 48rpx; min-height: 100vh; text-align: center; }
+.logo { font-size: 160rpx; }
+.app-name { font-size: 40rpx; font-weight: 600; margin-top: 24rpx; }
+.version { font-size: 24rpx; margin-top: 12rpx; }
+.desc { font-size: 26rpx; margin-top: 48rpx; }

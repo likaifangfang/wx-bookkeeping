@@ -1,0 +1,49 @@
+<view class="aa-page">
+  <view class="header">
+    <view class="title">{{ monthLabel }} 支出账单</view>
+    <view class="toggle-all" bindtap="toggleAll">
+      {{ selectedCount === records.length && records.length ? '取消全选' : '全选' }}
+    </view>
+  </view>
+
+  <view class="record-list" wx:if="{{ records.length }}">
+    <view
+      class="record-item {{ selectedIds[item._id] ? 'checked' : '' }}"
+      wx:for="{{ records }}"
+      wx:key="_id"
+      data-id="{{ item._id }}"
+      bindtap="toggleOne"
+    >
+      <view class="check">
+        <view class="check-box">{{ selectedIds[item._id] ? '✓' : '' }}</view>
+      </view>
+      <view class="icon" style="background:{{ item.category_color }}">
+        <text class="emoji">{{ item.category_icon }}</text>
+      </view>
+      <view class="info">
+        <view class="row1">
+          <text class="name">{{ item.category_name }}</text>
+          <text class="amount">¥{{ item.amount_label }}</text>
+        </view>
+        <view class="row2">
+          <text class="meta">{{ item.date_label }} · {{ item.creator_nickname || '我' }}</text>
+          <text class="note text-muted" wx:if="{{ item.note }}">{{ item.note }}</text>
+        </view>
+      </view>
+    </view>
+    <view class="loading text-muted" wx:if="{{ loading }}">加载中...</view>
+    <view class="loading text-muted" wx:elif="{{ !hasMore }}">已加载全部</view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="text-muted">{{ loading ? '加载中...' : '当月还没有支出账单' }}</view>
+  </view>
+
+  <view class="footer">
+    <view class="footer-info">
+      已选 <text class="hl">{{ selectedCount }}</text> 笔，
+      共 <text class="hl">¥{{ selectedTotalLabel }}</text>
+    </view>
+    <button class="btn-aa" bindtap="startSplit">开始 AA 分账</button>
+  </view>
+</view>

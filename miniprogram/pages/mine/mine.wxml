@@ -1,0 +1,80 @@
+<view class="mine-page">
+  <view class="profile" bindtap="openProfileModal">
+    <view class="avatar-wrap">
+      <image
+        wx:if="{{ user.avatar_url }}"
+        class="avatar"
+        src="{{ user.avatar_url }}"
+        mode="aspectFill"
+      />
+      <view wx:else class="avatar avatar-placeholder">👤</view>
+    </view>
+    <view class="info">
+      <view class="nickname">{{ user.nickname || '点击设置昵称头像' }}</view>
+      <view class="hint text-muted">点击编辑资料</view>
+    </view>
+  </view>
+
+  <view class="cell-group">
+    <view class="cell" bindtap="goLedgers">
+      <view class="cell-label">📂 我的账本</view>
+      <view class="cell-arrow">›</view>
+    </view>
+    <view class="cell" bindtap="goCategories">
+      <view class="cell-label">🏷️ 分类管理</view>
+      <view class="cell-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="cell-group">
+    <view class="cell" bindtap="goSettings">
+      <view class="cell-label">⚙️ 设置</view>
+      <view class="cell-arrow">›</view>
+    </view>
+    <view class="cell" bindtap="goAbout">
+      <view class="cell-label">ℹ️ 关于</view>
+      <view class="cell-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 资料编辑弹层 -->
+  <view class="mask" wx:if="{{ showProfileModal }}" catchtouchmove="noop">
+    <view class="modal" catchtap="noop">
+      <view class="modal-title">设置昵称头像</view>
+
+      <view class="form-row">
+        <view class="form-label">头像</view>
+        <button
+          class="avatar-button"
+          open-type="chooseAvatar"
+          bindchooseavatar="onChooseAvatar"
+        >
+          <image
+            wx:if="{{ formAvatar }}"
+            class="avatar-preview"
+            src="{{ formAvatar }}"
+            mode="aspectFill"
+          />
+          <view wx:else class="avatar-preview avatar-placeholder">点击选择</view>
+        </button>
+      </view>
+
+      <view class="form-row">
+        <view class="form-label">昵称</view>
+        <input
+          class="form-input"
+          type="nickname"
+          placeholder="请输入昵称"
+          value="{{ formNickname }}"
+          bindinput="onNicknameInput"
+          maxlength="20"
+        />
+      </view>
+
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-cancel" bindtap="closeProfileModal">取消</view>
+        <view class="modal-btn modal-btn-confirm" bindtap="saveProfile">保存</view>
+      </view>
+    </view>
+  </view>
+</view>

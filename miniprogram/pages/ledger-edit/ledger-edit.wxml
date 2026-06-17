@@ -1,0 +1,45 @@
+<view class="page" wx:if="{{ ledger }}">
+  <view class="card">
+    <view class="row" wx:if="{{ isOwner }}" bindtap="rename">
+      <view class="label">名称</view>
+      <view class="value">{{ ledger.name }} ▸</view>
+    </view>
+    <view class="row" wx:else>
+      <view class="label">名称</view>
+      <view class="value">{{ ledger.name }}</view>
+    </view>
+    <view class="row">
+      <view class="label">类型</view>
+      <view class="value">{{ ledger.type === 'shared' ? '共享账本' : '个人账本' }}</view>
+    </view>
+    <view class="row">
+      <view class="label">成员</view>
+      <view class="value">{{ ledger.member_count }} 人</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">成员列表</view>
+    <view class="member" wx:for="{{ members }}" wx:key="_id">
+      <view class="m-avatar-wrap">
+        <image
+          wx:if="{{ item.avatar_url }}"
+          class="m-avatar"
+          src="{{ item.avatar_url }}"
+          mode="aspectFill"
+        />
+        <view wx:else class="m-avatar m-avatar-placeholder">👤</view>
+      </view>
+      <view class="m-info">
+        <view class="m-name">{{ item.nickname }}</view>
+        <view class="m-role text-muted">{{ item.role === 'owner' ? '所有者' : '成员' }}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button class="btn-primary" wx:if="{{ ledger.type === 'shared' && isOwner }}" bindtap="copyInviteCode">复制邀请码</button>
+    <view class="btn-danger" wx:if="{{ isOwner }}" bindtap="remove">删除账本</view>
+    <view class="btn-default" wx:if="{{ !isOwner }}" bindtap="leave">退出账本</view>
+  </view>
+</view>

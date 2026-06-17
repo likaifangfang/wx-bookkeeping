@@ -1,0 +1,9 @@
+{
+  "name": "onUserLogin",
+  "version": "1.0.0",
+  "description": "用户登录 + 初始化默认账本与分类",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

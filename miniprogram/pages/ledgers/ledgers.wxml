@@ -1,0 +1,28 @@
+<view class="ledgers-page">
+  <view class="card-list">
+    <view
+      class="ledger-card"
+      wx:for="{{ ledgers }}"
+      wx:key="_id"
+      data-id="{{ item._id }}"
+      bindtap="switchLedger"
+    >
+      <view class="left" style="background:{{ item.color }}">
+        {{ item.name }}
+      </view>
+      <view class="middle">
+        <view class="name">
+          {{ item.name }}
+          <text class="badge" wx:if="{{ item.type === 'shared' }}">共享</text>
+        </view>
+        <view class="meta text-muted">
+          {{ item.type === 'shared' ? item.member_count + ' 人' : '个人' }}
+          · {{ item.my_role === 'owner' ? '所有者' : '成员' }}
+        </view>
+      </view>
+      <view class="right" data-id="{{ item._id }}" catchtap="goEdit">设置</view>
+    </view>
+  </view>
+
+  <view class="add-btn" bindtap="goCreate">＋ 新建账本</view>
+</view>

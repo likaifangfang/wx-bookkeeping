@@ -1,0 +1,121 @@
+.aa-page {
+  min-height: 100vh;
+  padding-bottom: 200rpx;
+  background: #f7f8fa;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: #fff;
+}
+.title { font-size: 30rpx; font-weight: 600; }
+.toggle-all {
+  color: #4A90E2;
+  font-size: 26rpx;
+  padding: 8rpx 16rpx;
+}
+
+.record-list { padding: 16rpx 24rpx; }
+
+.record-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  transition: background 0.15s;
+}
+
+.record-item.checked { background: #eaf3ff; }
+
+.check {
+  width: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.check-box {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #c8c9cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24rpx;
+  background: #fff;
+}
+.record-item.checked .check-box {
+  background: #4A90E2;
+  border-color: #4A90E2;
+}
+
+.icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.icon .emoji { font-size: 36rpx; line-height: 1; }
+
+.info { flex: 1; min-width: 0; }
+.row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+.name { font-size: 28rpx; }
+.amount { font-size: 30rpx; font-weight: 500; }
+.row2 {
+  display: flex;
+  font-size: 22rpx;
+  color: #969799;
+}
+.row2 .note {
+  margin-left: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.loading {
+  text-align: center;
+  padding: 24rpx;
+  font-size: 24rpx;
+}
+.empty { text-align: center; padding: 200rpx 0; }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20rpx 32rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.footer-info {
+  font-size: 24rpx;
+  color: #646566;
+  margin-bottom: 16rpx;
+}
+.footer-info .hl { color: #4A90E2; font-weight: 600; }
+.btn-aa {
+  background: #4A90E2;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 48rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+}

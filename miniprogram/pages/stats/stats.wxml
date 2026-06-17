@@ -1,0 +1,52 @@
+<view class="stats-page">
+  <view class="month-nav">
+    <view class="nav-arrow" bindtap="prevMonth">◀</view>
+    <view class="nav-label">{{ monthLabel }}</view>
+    <view class="nav-arrow {{ isCurrentMonth ? 'disabled' : '' }}" bindtap="nextMonth">▶</view>
+  </view>
+
+  <view class="overview">
+    <view class="ov-item">
+      <view class="ov-label">{{ isCurrentMonth ? '本月支出' : '当月支出' }}</view>
+      <view class="ov-value text-danger">¥{{ overview.expense || '0.00' }}</view>
+    </view>
+    <view class="ov-item">
+      <view class="ov-label">{{ isCurrentMonth ? '本月收入' : '当月收入' }}</view>
+      <view class="ov-value text-success">¥{{ overview.income || '0.00' }}</view>
+    </view>
+    <view class="ov-item">
+      <view class="ov-label">结余</view>
+      <view class="ov-value">¥{{ overview.balance || '0.00' }}</view>
+    </view>
+  </view>
+
+  <view class="type-tabs">
+    <view class="tab {{ type === 'expense' ? 'active' : '' }}" data-type="expense" bindtap="switchType">支出</view>
+    <view class="tab {{ type === 'income' ? 'active' : '' }}" data-type="income" bindtap="switchType">收入</view>
+  </view>
+
+  <view class="category-stats card" wx:if="{{ categoryStats.length }}">
+    <view class="rank-title">分类排行</view>
+    <view class="rank-item" wx:for="{{ categoryStats }}" wx:key="category_id">
+      <view class="rank-icon" style="background:{{ item.color }}"><text class="emoji">{{ item.icon }}</text></view>
+      <view class="rank-main">
+        <view class="rank-row">
+          <text class="rank-name">{{ item.name }}</text>
+          <text class="rank-amount">¥{{ item.total_label }}</text>
+        </view>
+        <view class="rank-bar">
+          <view class="rank-bar-inner" style="width:{{ item.percent }}%; background:{{ item.color }}"></view>
+        </view>
+        <view class="rank-percent text-muted">{{ item.percent }}%</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="text-muted">{{ isCurrentMonth ? '本月还没有数据' : '当月没有数据' }}</view>
+  </view>
+
+  <view class="aa-action">
+    <button class="btn-aa" bindtap="aaSplit">一键 AA 分账</button>
+  </view>
+</view>
