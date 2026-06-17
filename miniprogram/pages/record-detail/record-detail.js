@@ -53,7 +53,7 @@ Page({
           ...record,
           images: displayImages,  // 替换为 https 链接
           amount_label: moneyUtil.format(record.amount),
-          record_date_label: dateUtil.formatDate(record.record_date, 'yyyy-MM-dd HH:mm'),
+          record_date_label: dateUtil.formatDate(record.record_date, 'yyyy-MM-dd'),
           created_at_label: dateUtil.formatDate(record.created_at, 'yyyy-MM-dd HH:mm')
         },
         canEdit
